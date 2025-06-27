@@ -5,6 +5,10 @@ const errorHandler = (err, req, res, next) => {
         return res.status(400).json({message: err.errors[0].message})
     }
 
+    if (err.name === "BadRequest") {
+        return res.status(400).json({message: err.message})
+    }
+
     return res.status(500).json({message: "Internal Server Error"})
 }
 
