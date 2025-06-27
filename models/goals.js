@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Goals.belongsTo(models.Users, {
+      Goals.belongsTo(models.User, {
         foreignKey: 'UserId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
