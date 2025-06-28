@@ -23,5 +23,6 @@ router.delete('/transactions/:id', TransactionController.deleteTransaction)
 
 router.get('/categories', CategoriesController.getCategories)
 router.post('/categories', CategoriesController.createCategory)
+router.put('/categories/:id', CategoriesController.updateCategory)
 
 module.exports = router

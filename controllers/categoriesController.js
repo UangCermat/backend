@@ -31,4 +31,28 @@ module.exports = class CategoriesController {
             next(err);
         }
     }
+
+    static async updateCategory(req, res, next) {
+        try{
+            const UserId = req.user.id;
+            const { id } = req.params;
+            const { name, type } = req.body;
+
+            const findCategory = await Categories.findOne({ where: { id, UserId } });
+            if (!findCategory) {
+                throw { name: 'NotFound', message: 'Category not found' };
+            }
+
+            await Categories.update({
+                name,
+                type
+            }, {
+                where: { id, UserId }
+            });
+
+            res.status(200).json({message: `Category ${name} updated successfully`})
+        } catch(err) {
+            next(err);
+        }
+    }
 }
