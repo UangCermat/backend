@@ -34,4 +34,31 @@ module.exports = class TransactionController {
             next(error)
         }
     }
+
+    static async updateTransaction(req, res, next) {
+        try {
+            const UserId = req.user.id
+            const { id } = req.params
+            const { type, CategoryId, amount, note, date } = req.body
+
+            const findTransaction = await Transactions.findOne({ where: { id, UserId } })
+            if (!findTransaction) {
+                throw { name: 'NotFound', message: 'Transaction not found' }
+            }
+
+            const updatedTransaction = await Transactions.update({
+                type,
+                CategoryId,
+                amount,
+                note,
+                date
+            }, {
+                where: { id, UserId }
+            })
+
+            res.json({ message: 'Transaction updated successfully', transaction: findTransaction.note })
+        } catch (error) {
+            next(error)
+        }
+    }
 }
