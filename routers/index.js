@@ -18,5 +18,6 @@ router.use(authentication)
 router.get('/transactions', TransactionController.getTransactions)
 router.post('/transactions', TransactionController.createTransaction)
 router.put('/transactions/:id', TransactionController.updateTransaction)
+router.delete('/transactions/:id', TransactionController.deleteTransaction)
 
 module.exports = router

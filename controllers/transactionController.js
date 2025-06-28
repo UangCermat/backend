@@ -46,7 +46,7 @@ module.exports = class TransactionController {
                 throw { name: 'NotFound', message: 'Transaction not found' }
             }
 
-            const updatedTransaction = await Transactions.update({
+            await Transactions.update({
                 type,
                 CategoryId,
                 amount,
@@ -57,6 +57,23 @@ module.exports = class TransactionController {
             })
 
             res.json({ message: 'Transaction updated successfully', transaction: findTransaction.note })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async deleteTransaction(req, res, next) {
+        try {
+            const UserId = req.user.id
+            const { id } = req.params
+            const findTransaction = await Transactions.findOne({ where: { id, UserId } })
+            if (!findTransaction) {
+                throw { name: 'NotFound', message: 'Transaction not found' }
+            }
+
+            await Transactions.destroy({ where: { id, UserId } })
+
+            res.json({ message: 'Transaction deleted successfully', transaction: findTransaction.note })
         } catch (error) {
             next(error)
         }
