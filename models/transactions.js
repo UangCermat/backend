@@ -24,14 +24,43 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Transactions.init({
-    UserId:{ type: DataTypes.INTEGER,
+    UserId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    type: DataTypes.ENUM('income', 'expense'),
-    CategoryId: { type: DataTypes.INTEGER,
+    type: {
+      type: DataTypes.ENUM('income', 'expense'),
       allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: 'Type is required'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'Type cannot be empty'
+        },
+        isIn: {
+          args: [['income', 'expense']],
+          msg: 'Type must be either income or expense'
+        }
+      }
     },
-    amount: { 
+    CategoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: 'CategoryId is required'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'CategoryId cannot be empty'
+        }
+      }
+    },
+    amount: {
       type: DataTypes.DECIMAL,
       allowNull: false,
       validate: {
@@ -49,7 +78,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    note: { 
+    note: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
@@ -63,7 +92,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    date: { 
+    date: {
       type: DataTypes.DATE,
       allowNull: false,
       validate: {

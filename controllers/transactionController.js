@@ -1,7 +1,7 @@
 const { Transactions } = require('../models')
 
 module.exports = class TransactionController {
-    static async getTransactions(req, res) {
+    static async getTransactions(req, res, next) {
         try {
             const userId = req.user.id
             const transactions = await Transactions.findAll({ 
@@ -10,26 +10,28 @@ module.exports = class TransactionController {
             })
             res.json(transactions)
         } catch (error) {
-            res.status(500).json({ message: 'Internal server error' })
+            next(error)
         }
     }
 
-    static async addTransaction(req, res) {
+    static async createTransaction(req, res, next) {
         try {
             const UserId = req.user.id
 
-            const { amount, description, date } = req.body
+            const { type, CategoryId, amount, note, date } = req.body
 
             const transaction = await Transactions.create({
                 UserId,
+                type,
+                CategoryId,
                 amount,
-                description,
+                note,
                 date
             })
 
-            res.status(201).json(transaction)
+            res.status(201).json({message: 'Transaction created successfully', transaction})
         } catch (error) {
-            res.status(500).json({ message: 'Internal server error' })
+            next(error)
         }
     }
 }

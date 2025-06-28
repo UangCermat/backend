@@ -16,5 +16,6 @@ router.post('/login', UserController.login)
 router.use(authentication)
 
 router.get('/transactions', TransactionController.getTransactions)
+router.post('/transactions', TransactionController.createTransaction)
 
 module.exports = router
