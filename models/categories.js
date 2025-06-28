@@ -18,14 +18,39 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
+
   Categories.init({
-    name: { 
-      type: DataTypes.STRING, 
-      allowNull: false 
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Name cannot be empty'
+        },
+        notNull: {
+          args: true,
+          msg: 'Name is required'
+        }
+      },
     },
-    type: { 
+    type: {
       type: DataTypes.ENUM('income', 'expense'),
-      allowNull: false ,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: 'Type is required'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'Type cannot be empty'
+        },
+        isIn: {
+          args: [['income', 'expense']],
+          msg: 'Type must be either income or expense'
+        }
+      }
     },
     UserId: {
       type: DataTypes.INTEGER,
@@ -38,8 +63,8 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'CASCADE'
     }
   }, {
-    sequelize,
-    modelName: 'Categories',
-  });
-  return Categories;
+  sequelize,
+  modelName: 'Categories',
+});
+return Categories;
 };

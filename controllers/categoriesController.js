@@ -13,4 +13,22 @@ module.exports = class CategoriesController {
             next(err);
         }
     }
+
+    static async createCategory(req, res, next) {
+        try{
+            const UserId = req.user.id;
+            const { name, type } = req.body;
+
+            const newCategory = await Categories.create({
+                name,
+                type,
+                UserId
+            });
+            // console.log('Creating category:', { name, type, UserId });
+
+            res.status(201).json({message: `Category ${newCategory.name} created successfully`})
+        } catch(err) {
+            next(err);
+        }
+    }
 }
