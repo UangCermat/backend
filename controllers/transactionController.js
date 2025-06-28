@@ -56,7 +56,7 @@ module.exports = class TransactionController {
                 where: { id, UserId }
             })
 
-            res.json({ message: 'Transaction updated successfully', transaction: findTransaction.note })
+            res.json({ message: 'Transaction updated successfully' })
         } catch (error) {
             next(error)
         }
@@ -73,7 +73,7 @@ module.exports = class TransactionController {
 
             await Transactions.destroy({ where: { id, UserId } })
 
-            res.json({ message: 'Transaction deleted successfully', transaction: findTransaction.note })
+            res.json({ message: 'Transaction deleted successfully' })
         } catch (error) {
             next(error)
         }

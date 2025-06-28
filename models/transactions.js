@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
+  
   Transactions.init({
     UserId: {
       type: DataTypes.INTEGER,
