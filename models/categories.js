@@ -26,6 +26,16 @@ module.exports = (sequelize, DataTypes) => {
     type: { 
       type: DataTypes.ENUM('income', 'expense'),
       allowNull: false ,
+    },
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Users',
+        key: 'id'
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     }
   }, {
     sequelize,
