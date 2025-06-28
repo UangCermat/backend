@@ -50,7 +50,27 @@ module.exports = class CategoriesController {
                 where: { id, UserId }
             });
 
-            res.status(200).json({message: `Category ${name} updated successfully`})
+            res.status(200).json({message: `Category updated successfully`})
+        } catch(err) {
+            next(err);
+        }
+    }
+
+    static async deleteCategory(req, res, next) {
+        try{
+            const UserId = req.user.id;
+            const { id } = req.params;
+
+            const findCategory = await Categories.findOne({ where: { id, UserId } });
+            if (!findCategory) {
+                throw { name: 'NotFound', message: 'Category not found' };
+            }
+
+            await Categories.destroy({
+                where: { id, UserId }
+            });
+
+            res.status(200).json({message: `Category deleted successfully`})
         } catch(err) {
             next(err);
         }
