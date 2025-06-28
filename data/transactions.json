@@ -1,0 +1,50 @@
+[
+  {
+    "UserId": 1,
+    "CategoryId": 1,
+    "type": "income",
+    "amount": 5000000,
+    "note": "Gaji bulan Juni",
+    "date": "2025-06-01"
+  },
+  {
+    "UserId": 1,
+    "CategoryId": 2,
+    "type": "income",
+    "amount": 500000,
+    "note": "Bonus project",
+    "date": "2025-06-03"
+  },
+  {
+    "UserId": 1,
+    "CategoryId": 4,
+    "type": "expense",
+    "amount": 50000,
+    "note": "Makan siang",
+    "date": "2025-06-02"
+  },
+  {
+    "UserId": 1,
+    "CategoryId": 5,
+    "type": "expense",
+    "amount": 20000,
+    "note": "Naik bus",
+    "date": "2025-06-02"
+  },
+  {
+    "UserId": 1,
+    "CategoryId": 6,
+    "type": "expense",
+    "amount": 75000,
+    "note": "Nonton film",
+    "date": "2025-06-04"
+  },
+  {
+    "UserId": 1,
+    "CategoryId": 7,
+    "type": "expense",
+    "amount": 300000,
+    "note": "Bayar listrik",
+    "date": "2025-06-05"
+  }
+]

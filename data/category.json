@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Gaji",
+        "type": "income"
+      },
+      {
+        "name": "Bonus",
+        "type": "income"
+      },
+      {
+        "name": "Penjualan",
+        "type": "income"
+      },
+      {
+        "name": "Makanan",
+        "type": "expense"
+      },
+      {
+        "name": "Transportasi",
+        "type": "expense"
+      },
+      {
+        "name": "Hiburan",
+        "type": "expense"
+      },
+      {
+        "name": "Tagihan",
+        "type": "expense"
+      }
+]
