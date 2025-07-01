@@ -53,9 +53,10 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'Target amount is required'
         },
-        min: {
-          args: 0,
-          msg: 'Target amount must be a positive number'
+        isPositive(value) {
+          if (parseFloat(value) < 0) {
+            throw new Error('Target amount must be a positive number');
+          }
         }
       }
     },
@@ -65,7 +66,31 @@ module.exports = (sequelize, DataTypes) => {
     },
     deadline: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Deadline cannot be empty'
+        },
+        notNull: {
+          args: true,
+          msg: 'Deadline is required'
+        },
+        isDate: {
+          args: true,
+          msg: 'Deadline must be a valid date'
+        },
+        isFuture(value) {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          const inputDate = new Date(value);
+          inputDate.setHours(0, 0, 0, 0);
+
+          if (inputDate <= today) {
+            throw new Error('Deadline must be in the future');
+          }
+        }
+      }
     }
   }, {
     sequelize,

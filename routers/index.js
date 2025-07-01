@@ -5,6 +5,7 @@ const UserController = require('../controllers/userController')
 const authentication = require('../middleware/authentication')
 const TransactionController = require('../controllers/transactionController')
 const CategoriesController = require('../controllers/categoriesController')
+const GoalsController = require('../controllers/goalsController')
 
 
 router.get('/', (req, res) => {
@@ -25,5 +26,10 @@ router.get('/categories', CategoriesController.getCategories)
 router.post('/categories', CategoriesController.createCategory)
 router.put('/categories/:id', CategoriesController.updateCategory)
 router.delete('/categories/:id', CategoriesController.deleteCategory)
+
+router.get('/goals', GoalsController.getGoals)
+router.post('/goals', GoalsController.createGoal)
+router.put('/goals/:id', GoalsController.updateGoal)
+router.delete('/goals/:id', GoalsController.deleteGoal)
 
 module.exports = router
